@@ -1,0 +1,106 @@
+<div *ngIf="formulario" class="container__formulario">
+    <h1 class="title__formulario">{{producto?'Actualizar':'Nuevo'}} producto</h1>
+    <form [formGroup]="formulario" class="formulario__producto" (ngSubmit)="guardar()" autocomplete="off">
+        <div class="container__group">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Nombre</mat-label>
+                <input matInput type="text" formControlName="nombre" placeholder="Nombre" (keyup)="crearRuta()">
+                <mat-error>
+                    <ng-container *ngIf="controlError('nombre','required')">
+                        Este campo es obligatorio
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Ruta</mat-label>
+                <input matInput type="text" formControlName="nombreruta" placeholder="Ruta">
+                <mat-error>
+                    <ng-container *ngIf="controlError('nombreruta','required')">
+                        Este campo es obligatorio
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="container__group">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Registro Sanitario</mat-label>
+                <input matInput type="text" formControlName="registrosanitario" placeholder="Registro">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Precio normal </mat-label>
+                <input matInput type="number" formControlName="precionormal" placeholder="Precio" step="0.01">
+                <mat-error>
+                    <ng-container *ngIf="controlError('precionormal','required')">
+                        Este campo es obligatorio
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Descuento</mat-label>
+                <input matInput type="number" formControlName="preciorebajado" placeholder="Precio" step="0.01">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Stock </mat-label>
+                <input matInput type="number" formControlName="stock" placeholder="Stock">
+                <mat-error>
+                    <ng-container *ngIf="controlError('stock','required')">
+                        Este campo es obligatorio
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="container__group">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Descripcion Corta</mat-label>
+                <textarea rows="5" matInput type="text" formControlName="descripcioncorta"
+                    placeholder="Descripcion"></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Descripcion Larga</mat-label>
+                <textarea rows="5" matInput type="text" formControlName="descripcionlarga"
+                    placeholder="Descripcion"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="container__group">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Composición</mat-label>
+                <textarea rows="5" matInput type="text" formControlName="composicion"
+                    placeholder="Composición"></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Contraindicaciones</mat-label>
+                <textarea rows="5" matInput type="text" formControlName="contraindicaciones"
+                    placeholder="Contraindicaciones"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="container__group">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Precaución</mat-label>
+                <textarea rows="5" matInput type="text" formControlName="precaucion"
+                    placeholder="Precaución"></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Modo de Uso</mat-label>
+                <textarea rows="5" matInput type="text" formControlName="modouso" placeholder="Modo de Uso"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="container__group">
+
+        </div>
+        <div class="container__group">
+
+        </div>
+        <div class="container__button">
+            <button routerLink="/dashboard/lista-producto" mat-stroked-button color="primary">Volver</button>
+            <button mat-raised-button color="primary">{{producto?'Actualizar':'Guardar'}} producto</button>
+        </div>
+    </form>
+    <div>
+        <div *ngIf="formulario.controls['urlproducto'].value;else imageEmpty"> <img
+                [src]="'https://dw.dutypharma.com/upload/'+formulario.controls['urlproducto'].value"
+                class="imagen__formulario"></div>
+        <ng-template #imageEmpty>
+            Sin imagen
+        </ng-template>
+    </div>
+</div>

@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+   // apiBase: 'https://proyecto-cibersalud.herokuapp.com/api',
+    apiImg: 'https://dw.dutypharma.com/upload/',
+    apiBase: 'http://localhost:8080/api',
+    notImage: './assets/imagenes/no-im.png',
+    loginUrl: 'http://localhost:8080/login'
+   // loginUrl: 'https://proyecto-cibersalud.herokuapp.com/login'
 };
 
 /*

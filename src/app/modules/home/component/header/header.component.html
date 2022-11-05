@@ -1,0 +1,18 @@
+<header class="header">
+    <div class="hearder__titulo">
+        <a class="titulo__a" routerLink="/dashboard">Cibersalud</a>
+    </div>
+    <div class="header__lista">
+        <ul class="lista">
+            <li class="lista__item"><a class="item__link item__link-usuario" href="#" th:text="${cliente.nombrecompleto}"></a></li>
+            <li class="lista__item"><a class="item__link" href="#"><i class="fas fa-user-md"></i></a>
+                <ul class="lista__show">
+                    <li class="lista__item lista__item-barra"><a class="item__link"
+                            href="profile.html">Perfil</a>
+                    </li>
+                    <li class="lista__item"><a class="item__link" href="servPro?opcion=c">Cerrar Sesion</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>

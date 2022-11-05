@@ -1,0 +1,47 @@
+<div class="container__login" style="background-image: url(assets/imagenes/bacteria.jpg);">
+    <div class="contenedor__formulario">
+        <div class="contain__login">
+            <div class="cotenedor__titulos">
+                <h1 class="titulos-h1">CIBERSALUD</h1>
+                <h3 class="titulos-h3">Acceso al sistema</h3>
+            </div>
+            <form class="form__loguin" autocomplete="off" #formulario="ngForm" (ngSubmit)="login(formulario)">
+                <div class="contenedor__form-input">
+                    <div class="div-lbl-lbl"><label for="" class="lbl-input">Correo Electrónico</label></div>
+                    <input type="email" class="input-logueo" name="email" [(ngModel)]="credentials.username" required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel"
+                        [ngClass]="{'invalid-input':email.hasError('required')&& formulario.controls['email'].touched ||email.hasError('pattern')}">
+                    <div class="invalid-feedback login__haserror">
+                        <ng-container
+                            *ngIf="formulario.controls['email'].hasError('required') && formulario.controls['email'].touched">
+                            Ingresa tu correo electrónico
+                        </ng-container>
+                        <ng-container *ngIf="email.hasError('pattern')">
+                            Ingresar un correo valido
+                        </ng-container>
+                    </div>
+                    <div class="div-lbl-lbl"> <label for="" class="lbl-input">Contraseña</label></div>
+                    <div class="password"><input type="password" class="input-logueo" id="txtPassword" name="password"
+                            [(ngModel)]="credentials.password" required #password="ngModel"
+                            [ngClass]="{'invalid-input':password.hasError('required')&& formulario.controls['password'].touched}">
+                        <a id="span-e" class="span-eye" type="button" onclick="mostrarPassword()">
+                            <span class="fa fa-eye-slash icon"
+                                [ngClass]="{'fa-eye-slash-error':password.hasError('required')&& formulario.controls['password'].touched}"></span></a>
+                    </div>
+                    <div class="invalid-feedback login__haserror">
+                        <ng-container
+                            *ngIf="formulario.controls['password'].hasError('required') && formulario.controls['password'].touched">
+                            Ingresa tu contraseña
+                        </ng-container>
+                    </div>
+                    <button class="btn btn-danger" name="opcion">Ingresar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer__copy">
+            <p><span class="copyright">&copy;</span>2022 Cibersalud. Todos los derechos reservados</p>
+        </div>
+    </footer>
+</div>

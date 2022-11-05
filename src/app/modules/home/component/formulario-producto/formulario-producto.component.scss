@@ -1,0 +1,32 @@
+.container__formulario {
+    width: 95%;
+    margin: auto;
+    margin-top: 30px;
+
+    .title__formulario {
+        margin-bottom: 25px;
+        font-size: 25px;
+    }
+}
+
+.formulario__producto {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .container__group {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+    }
+    .container__button{
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+}
+
+.imagen__formulario {
+    width: 200px;
+    height: 200px;
+}
