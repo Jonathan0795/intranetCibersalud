@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatBadgeModule,
     MatSnackBarModule,
     MatMenuModule,
+    MatSelectModule,
     CommonModule
   ]
 })

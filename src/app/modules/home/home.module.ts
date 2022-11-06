@@ -12,6 +12,7 @@ import { FormularioProductoComponent } from './component/formulario-producto/for
 import { ListaProductoComponent } from './component/lista-producto/lista-producto.component';
 import { MaterialModule } from '../material/material.module';
 import { ApiImgPipe } from 'src/app/shared/pipes/api-img.pipe';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ApiImgPipe } from 'src/app/shared/pipes/api-img.pipe';
     HomeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    NgxImageZoomModule
   ]
 })
 export class HomeModule { }

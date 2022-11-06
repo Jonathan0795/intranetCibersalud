@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from 'src/app/core/services/producto.service';
-import { Producto } from 'src/app/shared/models/producto.model';
+import { Categoria, Laboratorio, Producto } from 'src/app/shared/models/producto.model';
 
 @Component({
   selector: 'app-formulario-producto',
@@ -10,9 +10,11 @@ import { Producto } from 'src/app/shared/models/producto.model';
   styleUrls: ['./formulario-producto.component.scss']
 })
 export class FormularioProductoComponent implements OnInit {
-
+  categoria?:Categoria[];
+  laboratorio?:Laboratorio[];
   producto?: Producto;
   formulario?: FormGroup;
+  errors: any;
 
   constructor(
     private fb: FormBuilder,
@@ -41,6 +43,8 @@ export class FormularioProductoComponent implements OnInit {
             precionormal: [producto.precionormal, [Validators.required]],
             preciorebajado: [producto.preciorebajado, []],
             urlproducto: [producto.urlproducto, []],
+            categorias: [producto.categorias.idcategorias, []],
+            laboratorio: [producto.laboratorio.idlaboratorio, []],
           })
         })
     } else {
@@ -58,18 +62,65 @@ export class FormularioProductoComponent implements OnInit {
         precaucion: [, []],
         modouso: [, []],
         urlproducto: [, []],
+        categorias: [, []],
+        laboratorio: [, []],
       })
     }
+
+    this.listCategory();
+    this.listLaboratory();
   }
+
+  
   controlError(control: string, error: string) {
     return this.formulario?.controls[control].hasError(error);
 
   }
 
-
-
+  listCategory(){
+    this.productoService.findAllCategoryNieto()
+    .subscribe(categoria =>{
+      this.categoria=categoria;
+    })
+  }
+  listLaboratory(){
+    this.productoService.finLaboratory()
+    .subscribe(laboratorio =>{
+      this.laboratorio=laboratorio;
+    })
+  }
   guardar() {
+    if (this.formulario?.invalid) {
+      this.formulario.markAllAsTouched();
+      return;
+    }
+    const producto = this.formulario?.value;
 
+    if(this.producto){
+      this.productoService.saveProduct(producto).subscribe({
+        next: producto => {     
+          this.router.navigate(['dashboard/lista-producto'])
+          console.log("actualizar..", producto)
+  
+        },
+        error: error => {
+          this.errors = error.error.errors;
+          // console.log("error",error)
+        }
+      })
+    }else{
+      this.productoService.saveProduct(producto).subscribe({
+        next: producto => {     
+          this.router.navigate(['dashboard/lista-producto'])
+          console.log("guardando..", producto)
+  
+        },
+        error: error => {
+          this.errors = error.error.errors;
+          // console.log("error",error)
+        }
+      })
+    }
   }
 
   crearRuta() {

@@ -47,13 +47,14 @@ export interface Categoria {
 
 export interface Laboratorio {
     idlaboratorio:    number;
-    laboratoriopadre: Laboratorio | null;
+    laboratoriopadre: number;
     deslaboratorio:   string;
-    infolaboratorio:  null;
-    imagenmarca:      null;
+    infolaboratorio:  string;
+    imagenmarca:      string;
     idestado:         number;
     laboratorioHijos: null;
     productos:        null;
+    jerarquia:        number;
 }
 
 export interface Pageable {

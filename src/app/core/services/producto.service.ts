@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Producto, Categoria, ProductoPage } from '../../shared/models/producto.model';
+import { Producto, Categoria, ProductoPage, Laboratorio } from '../../shared/models/producto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,9 @@ export class ProductoService {
   updateProduct(idproducto: number,producto: Producto):Observable<Producto> {
     return this.http.put<Producto>(`${environment.apiBase}/producto/${idproducto}`,producto)
   }
-
+  saveProduct(producto: Producto):Observable<Producto> {
+    return this.http.post<Producto>(`${environment.apiBase}/producto`, producto)
+}
   getProducto(size: number = 10, page: number = 0) {
     let params = new HttpParams();
     params = params.append('size', size);
@@ -42,8 +44,14 @@ export class ProductoService {
   }
 
   subirArchivo(formdata: FormData) {
-    return this.http.post(`${environment.apiBase}/assets/upload`, formdata);
+    return this.http.post(`${environment.apiBase}/producto/assets/upload`, formdata);
   }
 
+  findAllCategoryNieto(): Observable<Categoria[]> {
+    return this.http.get<Categoria[]>(`${environment.apiBase}/producto/categorias`)  // ALT GR + }
+  }
 
+  finLaboratory(): Observable<Laboratorio[]> {
+    return this.http.get<Laboratorio[]>(`${environment.apiBase}/producto/laboratorios`)  // ALT GR + }
+  }
 }
