@@ -30,11 +30,12 @@ export class ProductoService {
   }
 
   updateProduct(idproducto: number,producto: Producto):Observable<Producto> {
-    return this.http.put<Producto>(`${environment.apiBase}/producto/${idproducto}`,producto)
+    return this.http.put<Producto>(`${environment.apiBase}/producto/update/${idproducto}`,producto)
   }
   saveProduct(producto: Producto):Observable<Producto> {
-    return this.http.post<Producto>(`${environment.apiBase}/producto`, producto)
+    return this.http.post<Producto>(`${environment.apiBase}/producto/save`, producto)
 }
+
   getProducto(size: number = 10, page: number = 0) {
     let params = new HttpParams();
     params = params.append('size', size);
@@ -44,7 +45,7 @@ export class ProductoService {
   }
 
   subirArchivo(formdata: FormData) {
-    return this.http.post(`${environment.apiBase}/producto/assets/upload`, formdata);
+    return this.http.post(`${environment.apiBase}/producto/upload`, formdata);
   }
 
   findAllCategoryNieto(): Observable<Categoria[]> {

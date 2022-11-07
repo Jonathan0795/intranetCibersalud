@@ -90,6 +90,7 @@ $color-background: #020B30;
     flex-grow: 2;
     /* height: calc(100%-100px); */
 }
+
 /********HEADER********/
 
 .header {
@@ -107,6 +108,7 @@ $color-background: #020B30;
     display: flex;
     align-items: center;
 }
+
 /**********************NAV****************************/
 
 .nav__menu {
@@ -261,8 +263,8 @@ $color-background: #020B30;
 }
 
 .container__list__product {
-    width: 100%;
-
+    width: 95%;
+    margin: 1rem auto;
 }
 
 .medicamentos-header {
@@ -629,6 +631,18 @@ $color-background: #020B30;
 }
 
 .ngxImageZoomThumbnail {
-    max-width: 250px ;
+    max-width: 250px;
     max-height: 250px;
+}
+
+@media (min-width:1920px) {
+
+    .contenedor__form-input {
+        width: 80% !important;
+        margin: auto;
+    }
+
+    .container__list__product {
+        width: 80%;
+    }
 }

@@ -1,7 +1,11 @@
 <div class="container__list__product">
-  <a routerLink="/dashboard/formulario-producto" style="display: block;">Nuevo</a>
+  <div class="container__header__list">
+    <h1 class="title__list__product">Catálogo de productos</h1>
+    <button mat-raised-button color="warn" routerLink="/dashboard/formulario-producto" class="button__new_product">Agregar producto</button>
+  </div>
+  
 
-  <mat-form-field appearance="standard" class="w-100">
+  <mat-form-field appearance="standard" class="w-50">
     <mat-label>Buscar producto</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
   </mat-form-field>

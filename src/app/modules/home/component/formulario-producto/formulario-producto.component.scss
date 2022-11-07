@@ -47,6 +47,17 @@ $color-border: #dedede;
         margin-top: 10px;
         margin-bottom: 20px;
     }
+
+    .container__input__file{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .label__file__image{
+        color: rgba(0,0,0,.6);;
+        font-size: 10.5px;
+        display: block;
+    }
 }
 
 @media (min-width:1920px) {

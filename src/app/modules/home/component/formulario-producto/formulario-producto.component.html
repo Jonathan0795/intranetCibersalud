@@ -87,7 +87,26 @@
                 </ng-template>
             </div>
         </div>
+        <div class="container__group">
+            <mat-form-field appearance="outline" class="w-25">
+                <mat-label>Tipo de Presentación</mat-label>
+                <input matInput type="text" formControlName="tipopresentacion" placeholder="Presentación">
+            </mat-form-field>
+            <div class="mb-3">
+                <label class="label__file__image">Imagen</label>
+                <div class="container__input__file">
+                    <button type="button" mat-raised-button (click)="archivoImagenInputFile.click()">Seleccionar archivo</button>
+                <div *ngIf="formulario.controls['urlproducto'].valid">
+                    El archivo ha sido subido: {{formulario.controls['urlproducto'].value}}
+                </div>
+                </div>
+                <mat-error *ngIf="controlError('urlproducto','required')&& formulario.controls['urlproducto'].touched" style="font-size: 10.5px;margin-top: 5px;">
+                    Este campo es obligatorio
+                </mat-error>
+                <input type="file" accept="image/*" (change)="subirImagen($event)" class="form-control d-none" #archivoImagenInputFile>
+            </div>
 
+        </div>
 
         <div class="container__group">
             <mat-form-field appearance="outline" class="w-100">

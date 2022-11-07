@@ -10,8 +10,8 @@ import { Categoria, Laboratorio, Producto } from 'src/app/shared/models/producto
   styleUrls: ['./formulario-producto.component.scss']
 })
 export class FormularioProductoComponent implements OnInit {
-  categoria?:Categoria[];
-  laboratorio?:Laboratorio[];
+  categoria?: Categoria[];
+  laboratorio?: Laboratorio[];
   producto?: Producto;
   formulario?: FormGroup;
   errors: any;
@@ -43,6 +43,7 @@ export class FormularioProductoComponent implements OnInit {
             precionormal: [producto.precionormal, [Validators.required]],
             preciorebajado: [producto.preciorebajado, []],
             urlproducto: [producto.urlproducto, []],
+            tipopresentacion: [producto.tipopresentacion, []],
             categorias: [producto.categorias.idcategorias, []],
             laboratorio: [producto.laboratorio.idlaboratorio, []],
           })
@@ -61,7 +62,8 @@ export class FormularioProductoComponent implements OnInit {
         contraindicaciones: [, []],
         precaucion: [, []],
         modouso: [, []],
-        urlproducto: [, []],
+        urlproducto: [, [Validators.required]],
+        tipopresentacion: [, []],
         categorias: [, []],
         laboratorio: [, []],
       })
@@ -71,23 +73,23 @@ export class FormularioProductoComponent implements OnInit {
     this.listLaboratory();
   }
 
-  
+
   controlError(control: string, error: string) {
     return this.formulario?.controls[control].hasError(error);
 
   }
 
-  listCategory(){
+  listCategory() {
     this.productoService.findAllCategoryNieto()
-    .subscribe(categoria =>{
-      this.categoria=categoria;
-    })
+      .subscribe(categoria => {
+        this.categoria = categoria;
+      })
   }
-  listLaboratory(){
+  listLaboratory() {
     this.productoService.finLaboratory()
-    .subscribe(laboratorio =>{
-      this.laboratorio=laboratorio;
-    })
+      .subscribe(laboratorio => {
+        this.laboratorio = laboratorio;
+      })
   }
   guardar() {
     if (this.formulario?.invalid) {
@@ -95,32 +97,24 @@ export class FormularioProductoComponent implements OnInit {
       return;
     }
     const producto = this.formulario?.value;
+    let request;
 
-    if(this.producto){
-      this.productoService.saveProduct(producto).subscribe({
-        next: producto => {     
-          this.router.navigate(['dashboard/lista-producto'])
-          console.log("actualizar..", producto)
-  
-        },
-        error: error => {
-          this.errors = error.error.errors;
-          // console.log("error",error)
-        }
-      })
-    }else{
-      this.productoService.saveProduct(producto).subscribe({
-        next: producto => {     
-          this.router.navigate(['dashboard/lista-producto'])
-          console.log("guardando..", producto)
-  
-        },
-        error: error => {
-          this.errors = error.error.errors;
-          // console.log("error",error)
-        }
-      })
+    if (this.producto) {
+      request = this.productoService.updateProduct(this.producto.idproducto, producto);
+
+    } else {
+      request = this.productoService.saveProduct(producto)
     }
+    request.subscribe({
+      next: producto => {
+        this.router.navigate(['dashboard/lista-producto'])
+        console.log("guardando..", producto)
+      },
+      error: error => {
+        this.errors = error.error.errors;
+       
+      }
+    })
   }
 
   crearRuta() {
@@ -132,5 +126,18 @@ export class FormularioProductoComponent implements OnInit {
       .replace(/^-+/, '')
       .replace(/-+$/, '');
     this.formulario?.controls['nombreruta'].setValue(ruta);
+  }
+
+  subirImagen(event: any){
+    const file =event.target.files[0];
+    if(file){
+      const formdata =new FormData();
+      formdata.append('file',file);
+      this.productoService.subirArchivo(formdata)
+      .subscribe((response:any)=>{
+        //console.log('response',response)
+        this.formulario?.controls['urlproducto'].setValue(response.filename)
+      })
+    }  
   }
 }
