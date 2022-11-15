@@ -1,0 +1,97 @@
+$color-app-azure: #007FFF;
+
+.container__dashboard__info {
+    width: 95%;
+    margin: 2rem auto;
+
+    .card__container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .card__dashboar {
+            display: flex;
+        }
+    }
+}
+
+.card__dashboar {
+    .card__icon__dashboard {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 120px;
+
+        .icon__detail {
+            font-size: 35px;
+            color: #fff;
+        }
+    }
+
+    .card__main__dashboard {
+        width: 150px;
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #dedede;
+        border-left: 0;
+
+        .label__card__dashboard {
+            text-align: center;
+            display: block;
+            font-size: 14px;
+        }
+
+        .label__card__dashboard__count {
+            font-size: 40px;
+            font-weight: 600;
+        }
+    }
+}
+
+.container__tables {
+    margin-top: 2rem;
+    width: 100;
+    display: flex;
+    justify-content: flex-end;
+
+    .table__container__productos {
+
+        .title__container__table {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 1rem;
+            margin-bottom: 0;
+            border: 1px solid #dedede;
+            border-bottom: 2px solid $color-app-azure;
+            text-transform: uppercase;
+        }
+    }
+}
+
+tr.mat-header-row {
+    height: 0;
+}
+
+tr.mat-row {
+    border: 1px solid #dedede;
+    padding: 1rem 0;
+}
+
+.imagen__table {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+@media (min-width:1920px) {
+
+    .container__dashboard__info {
+        width: 80%;
+    }
+
+}

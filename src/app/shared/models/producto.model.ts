@@ -31,6 +31,8 @@ export interface Producto {
     registrosanitario:  string;
     stock:              number;
     idestado:           number;
+    fechaCreacion:      null;
+    fechaActualizacion: null;
 }
 
 export interface Categoria {

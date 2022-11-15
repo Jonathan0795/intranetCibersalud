@@ -1,4 +1,7 @@
 <div *ngIf="formulario" class="container__formulario">
+    <div class="container__button__header">
+        <button routerLink="/lista-producto" mat-stroked-button color="primary">Volver</button>
+    </div>
     <h1 class="title__formulario">{{producto?'Actualizar':'Nuevo'}} producto</h1>
     <form [formGroup]="formulario" class="formulario__producto" (ngSubmit)="guardar()" autocomplete="off">
         <div class="container__group__row">
@@ -150,7 +153,7 @@
 
         </div>
         <div class="container__button">
-            <button routerLink="/dashboard/lista-producto" mat-stroked-button color="primary">Volver</button>
+            <button routerLink="/lista-producto" mat-raised-button color="warn">Cancelar</button>
             <button mat-raised-button color="primary">{{producto?'Actualizar':'Guardar'}} producto</button>
         </div>
     </form>

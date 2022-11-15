@@ -92,21 +92,26 @@ $color-background: #020B30;
 }
 
 /********HEADER********/
-
-.header {
+header {
     width: 100%;
-    min-height: 60px;
-    background-color: $color-background;
-    display: flex;
-    color: #fff;
-    justify-content: flex-end;
-}
+    min-height: 50px;
+    background-color: #fff;
+    border-bottom: 1px solid #dedede;
 
+    .container__header {
+        width: 95%;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-.header__lista {
-    width: 50%;
-    display: flex;
-    align-items: center;
+        .text__day {
+            width: 100%;
+            margin: 0;
+            font-size: 14px;
+        }
+    }
+
 }
 
 /**********************NAV****************************/

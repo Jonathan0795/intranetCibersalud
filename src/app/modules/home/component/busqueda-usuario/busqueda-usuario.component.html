@@ -1,0 +1,73 @@
+<div class="container__search">
+    <div class="search__user__contain">
+        <div id="alertDni" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none">
+            <strong>Ingresa un numero de documento
+            </strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+        <div class="consulta">
+            <div class="consulta__titulos">
+                <h4>Búsqueda de usuario</h4>
+            </div>
+            <form [formGroup]="formulario" (ngSubmit)="buscar()" autocomplete="off" class="form__search__user">
+                <div class="w-100">
+                    <input type="text" name="txtDoc" class="input__search__user"
+                        placeholder="Ingrese el N° Documento del Usuario" formControlName="documento"
+                        [ngClass]="{'invalid-input':formulario.controls['documento'].invalid && (formulario.controls['documento'].dirty)}">
+                    <div class="invalid-feedback"
+                        *ngIf="formulario.controls['documento'].invalid && (formulario.controls['documento'].dirty)">
+                        <ng-container *ngIf="controlError('documento','pattern')">
+                            Solo se acepta números
+                        </ng-container>
+                        <ng-container *ngIf="controlError('documento','required')">
+                            Debe ingresar un documento
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="container__footer__search">
+                    <div> <button mat-raised-button color="primary">
+                            <mat-icon>search</mat-icon> Buscar
+                        </button></div>
+                    <div>
+                        <button mat-raised-button color="warn" class="button__new">
+                            <mat-icon>person_add</mat-icon> Nuevo
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="tablaPaciente">
+            <!-- <table id="myTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Documento</th>
+                            <th>Apellidos y Nombres</th>
+                            <th>Fecha Nacimiento</th>
+                            <th>Sexo</th>
+                            <th>Historia Clinica</th>
+                            <th class="table__accion">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                            <tr class="lisPaci">
+                                <td>${a.getDni()}</td>
+                                <td>${a.getApeNom()}</td>
+                                <td>${a.getFecnac()}</td>
+                                <td>${a.getTipoSexo() }</td>
+                                <td>${a.getNroHis() }</td>
+                                <td class="lisPaci__accion"><button type="submit" name="opcion"
+                                        class="btn btn-success" value="b" title="Actualizar">Actualizar
+                                        Registro</button>
+                                    <button type="submit" name="opcion" class="btn btn-dark"
+                                        value="gc">Registrar
+                                        Cita</button>
+                                </td>
+                            </tr>
+    
+                    </tbody>
+                </table> -->
+        </div>
+    </div>
+</div>

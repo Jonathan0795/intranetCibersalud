@@ -1,0 +1,63 @@
+<div class="container__dashboard__info">
+    <div class="card__container">
+        <div class="card__dashboar">
+            <div class="card__icon__dashboard" style="background-color:#00A88C ;">
+                <i class="fa-solid fa-user icon__detail"></i>
+            </div>
+            <div class="card__main__dashboard">
+                <label class="label__card__dashboard label__card__dashboard__count">2</label>
+                <label class="label__card__dashboard">Usuarios</label>
+            </div>
+        </div>
+        <div class="card__dashboar">
+            <div class="card__icon__dashboard" style="background-color:#F7DC6F ;">
+                <i class="fa-solid fa-list icon__detail"></i>
+            </div>
+            <div *ngIf="categorias" class="card__main__dashboard">
+                <label class="label__card__dashboard label__card__dashboard__count">{{categorias.length}}</label>
+                <label class="label__card__dashboard">Categorías</label>
+            </div>
+        </div>
+        <div class="card__dashboar">
+            <div class="card__icon__dashboard" style="background-color:#3795d8 ;">
+                <i class="fa-solid fa-box-open icon__detail"></i>
+            </div>
+            <div *ngIf="productos" class="card__main__dashboard">
+                <label class="label__card__dashboard label__card__dashboard__count">{{productos.length}}</label>
+                <label class="label__card__dashboard">Productos</label>
+            </div>
+        </div>
+        <div class="card__dashboar">
+            <div class="card__icon__dashboard" style="background-color:#fea838 ;">
+                <i class="fa-solid fa-cart-shopping icon__detail"></i>
+            </div>
+            <div class="card__main__dashboard">
+                <label class="label__card__dashboard label__card__dashboard__count">15</label>
+                <label class="label__card__dashboard">Ventas</label>
+            </div>
+        </div>
+    </div>
+    <div class="container__tables">
+        <div class="table__container__productos" *ngIf="productoPage">
+            <h5 class="title__container__table">Productos añadidos recientemente</h5>
+            <table mat-table [dataSource]="productoPage.content">
+                <!-- Position Column -->
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let producto" class="">
+                        <div class="title__product">{{producto.nombre}}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="imagen">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let producto" style="padding: 0;">
+                        <img [src]="producto.urlproducto |apiImg" class="imagen__table">
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+    
+</div>

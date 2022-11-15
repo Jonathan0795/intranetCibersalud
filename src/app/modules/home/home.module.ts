@@ -13,6 +13,8 @@ import { ListaProductoComponent } from './component/lista-producto/lista-product
 import { MaterialModule } from '../material/material.module';
 import { ApiImgPipe } from 'src/app/shared/pipes/api-img.pipe';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { DashboardInfoComponent } from './component/dashboard-info/dashboard-info.component';
+import { BusquedaUsuarioComponent } from './component/busqueda-usuario/busqueda-usuario.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     DashboardComponent,
     FormularioProductoComponent,
     ListaProductoComponent,
-    ApiImgPipe
+    ApiImgPipe,
+    DashboardInfoComponent,
+    BusquedaUsuarioComponent
   ],
   imports: [
     CommonModule,

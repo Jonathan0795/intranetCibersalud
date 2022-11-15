@@ -107,8 +107,8 @@ export class FormularioProductoComponent implements OnInit {
     }
     request.subscribe({
       next: producto => {
-        this.router.navigate(['dashboard/lista-producto'])
-        console.log("guardando..", producto)
+        this.router.navigate(['/lista-producto'])
+       // console.log("guardando..", producto)
       },
       error: error => {
         this.errors = error.error.errors;

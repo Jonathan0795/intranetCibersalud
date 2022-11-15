@@ -1,7 +1,7 @@
 <div class="container__list__product">
   <div class="container__header__list">
     <h1 class="title__list__product">Catálogo de productos</h1>
-    <button mat-raised-button color="warn" routerLink="/dashboard/formulario-producto" class="button__new_product">Agregar producto</button>
+    <button mat-raised-button color="warn" routerLink="/formulario-producto" class="button__new_product">Agregar producto</button>
   </div>
   
 
@@ -46,7 +46,7 @@
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let producto">
           <button mat-icon-button color="primary"
-            [routerLink]="['/dashboard/formulario-producto',producto.idproducto,'editar']" matTooltip="Editar producto">
+            [routerLink]="['/formulario-producto',producto.idproducto,'editar']" matTooltip="Editar producto">
             <mat-icon>edit</mat-icon>
           </button>
         </td>
