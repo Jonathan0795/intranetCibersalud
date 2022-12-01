@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from 'src/app/core/services/producto.service';
 import { Categoria, Laboratorio, Producto } from 'src/app/shared/models/producto.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-formulario-producto',
@@ -63,7 +64,7 @@ export class FormularioProductoComponent implements OnInit {
         precaucion: [, []],
         modouso: [, []],
         urlproducto: [, [Validators.required]],
-        tipopresentacion: [, []],
+        tipopresentacion: [, [Validators.required]],
         categorias: [, []],
         laboratorio: [, []],
       })
@@ -71,9 +72,28 @@ export class FormularioProductoComponent implements OnInit {
 
     this.listCategory();
     this.listLaboratory();
+
+
   }
 
-
+  fire() {
+    Swal.fire({
+      title: '¿Seguro de salir sin guardar cambios?',
+      showDenyButton: true,
+      showConfirmButton: false,
+      showCancelButton: true,
+      icon: 'warning',
+      denyButtonText: `No guardar`,
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        // Swal.fire('Saved!', '', 'success')
+      } else if (result.isDenied) {
+        this.router.navigate(['/lista-producto']);
+      }
+    })
+  }
   controlError(control: string, error: string) {
     return this.formulario?.controls[control].hasError(error);
 
@@ -107,12 +127,19 @@ export class FormularioProductoComponent implements OnInit {
     }
     request.subscribe({
       next: producto => {
-        this.router.navigate(['/lista-producto'])
-       // console.log("guardando..", producto)
+        Swal.fire(
+          '',
+          `${producto.nombre} se guardó correctamente`,
+          'success'
+        )
+        setTimeout(() => {
+          this.router.navigate(['/lista-producto'])
+          // console.log("guardando..", producto)
+        }, 2500);
       },
       error: error => {
         this.errors = error.error.errors;
-       
+
       }
     })
   }
@@ -128,16 +155,16 @@ export class FormularioProductoComponent implements OnInit {
     this.formulario?.controls['nombreruta'].setValue(ruta);
   }
 
-  subirImagen(event: any){
-    const file =event.target.files[0];
-    if(file){
-      const formdata =new FormData();
-      formdata.append('file',file);
+  subirImagen(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const formdata = new FormData();
+      formdata.append('file', file);
       this.productoService.subirArchivo(formdata)
-      .subscribe((response:any)=>{
-        //console.log('response',response)
-        this.formulario?.controls['urlproducto'].setValue(response.filename)
-      })
-    }  
+        .subscribe((response: any) => {
+          //console.log('response',response)
+          this.formulario?.controls['urlproducto'].setValue(response.filename)
+        })
+    }
   }
 }

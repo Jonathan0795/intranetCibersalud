@@ -1,22 +1,20 @@
 <div class="container__list__product">
   <div class="container__header__list">
     <h1 class="title__list__product">Catálogo de productos</h1>
-    <button mat-raised-button color="warn" routerLink="/formulario-producto" class="button__new_product">Agregar producto</button>
+    <button mat-raised-button color="warn" routerLink="/formulario-producto" class="button__new_product">Agregar
+      producto</button>
   </div>
-  
-
   <mat-form-field appearance="standard" class="w-50">
     <mat-label>Buscar producto</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    <input matInput (keyup)="applyFilter($event)" #input>
   </mat-form-field>
   <div class="mat-elevation-z8" *ngIf="productoPage">
+
     <table mat-table [dataSource]="productoPage.content">
-      <!-- Position Column -->
+
       <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef> Nombre </th>
-
-        <td mat-cell *matCellDef="let producto" class="
-        ">
+        <td mat-cell *matCellDef="let producto">
           <div class="container__title">
             <img [src]="producto.urlproducto |apiImg" class="imagen__table">
             <div class="title__product">{{producto.nombre}} </div>
@@ -24,38 +22,40 @@
         </td>
       </ng-container>
 
-      <!-- Name Column -->
       <ng-container matColumnDef="categoria">
         <th mat-header-cell *matHeaderCellDef> Categoria </th>
         <td mat-cell *matCellDef="let producto"> {{producto.categorias.desccategoria}} </td>
       </ng-container>
 
-      <!-- Weight Column -->
       <ng-container matColumnDef="precio">
         <th mat-header-cell *matHeaderCellDef> Precio </th>
         <td mat-cell *matCellDef="let producto"> {{producto.precionormal
           |currency:'S/ '}} </td>
       </ng-container>
 
-      <!-- Symbol Column -->
       <ng-container matColumnDef="presentacion">
         <th mat-header-cell *matHeaderCellDef> Presentación </th>
         <td mat-cell *matCellDef="let producto"> {{producto.tipopresentacion}} </td>
       </ng-container>
+
       <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let producto">
-          <button mat-icon-button color="primary"
-            [routerLink]="['/formulario-producto',producto.idproducto,'editar']" matTooltip="Editar producto">
+          <button mat-icon-button color="primary" [routerLink]="['/formulario-producto',producto.idproducto,'editar']"
+            matTooltip="Editar producto">
             <mat-icon>edit</mat-icon>
           </button>
         </td>
       </ng-container>
 
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No hay resultados para "{{input.value}}"</td>
+      </tr>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons [length]="productoPage.totalElements"
       [pageSize]="productoPage.size" (page)="paginarProducto($event)">
     </mat-paginator>

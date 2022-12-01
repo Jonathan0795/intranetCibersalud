@@ -15,6 +15,7 @@ import { ApiImgPipe } from 'src/app/shared/pipes/api-img.pipe';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { DashboardInfoComponent } from './component/dashboard-info/dashboard-info.component';
 import { BusquedaUsuarioComponent } from './component/busqueda-usuario/busqueda-usuario.component';
+import { ForbiddenComponent } from './component/forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BusquedaUsuarioComponent } from './component/busqueda-usuario/busqueda-
     ListaProductoComponent,
     ApiImgPipe,
     DashboardInfoComponent,
-    BusquedaUsuarioComponent
+    BusquedaUsuarioComponent,
+    ForbiddenComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { ProductoService } from 'src/app/core/services/producto.service';
 import { Producto, ProductoPage } from 'src/app/shared/models/producto.model';
 
@@ -9,33 +10,41 @@ import { Producto, ProductoPage } from 'src/app/shared/models/producto.model';
   styleUrls: ['./lista-producto.component.scss']
 })
 export class ListaProductoComponent implements OnInit {
-  displayedColumns: string[] = ['nombre', 'precio', 'categoria', 'presentacion','acciones'];
 
   productos: Producto[] = [];
   productoPage?: ProductoPage;
   product?: Producto;
+
+  displayedColumns: string[] = ['nombre', 'precio', 'categoria', 'presentacion','acciones'];
+  dataSource  = new MatTableDataSource(this.productoPage?.content);
+  
   constructor(
     private productoservice: ProductoService,
   ) { }
 
   ngOnInit(): void {
-    this.getProducto();
+    this.getProducto(); 
   }
 
   getProducto(){
     this.productoservice.getProducto()
     .subscribe(productoPage =>{
       this.productoPage = productoPage;
-    })
-  }
-  applyFilter(event: Event) {
-    /*
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.productos.filter = filterValue.trim().toLowerCase();
+      //this.dataSource = new MatTableDataSource(this.productoPage?.content);
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }*/
+    });
+    
+    //this.dataSource = new MatTableDataSource(this.productoPage?.content);
+    //console.log(this.productoPage?.content);
+    //console.log(this.dataSource);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    
+    console.log(filterValue);
   }
 
   paginarProducto(event: PageEvent){

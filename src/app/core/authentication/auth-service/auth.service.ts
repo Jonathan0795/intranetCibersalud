@@ -56,8 +56,8 @@ export class AuthService {
   public getAuthorities(): string[] {
     this.roles = [];
     if (localStorage.getItem(AUTHORITIES_KEY)) {
-      JSON.parse(localStorage.getItem(AUTHORITIES_KEY) || "[]").forEach((authority: any) => {
-        this.roles.push(authority.authority);
+      JSON.parse(localStorage.getItem(AUTHORITIES_KEY)!).forEach((authority: string)=> {
+        this.roles.push(authority);
       });
     }
     return this.roles;

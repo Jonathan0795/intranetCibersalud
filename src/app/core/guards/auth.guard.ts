@@ -7,7 +7,7 @@ import { AuthService } from '../authentication/auth-service/auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
+  realRol?: string;
   constructor(
     private router: Router,
     private authService: AuthService
@@ -18,11 +18,20 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.authService.isLoggedIn() && this.authService.getAuthorities()) {
-      return true;
-    }
-    this.router.navigate(['/login']);
-    return false;
-  }
+    const expectedRol = route.data['expectedRol'];
+    const roles = this.authService.getAuthorities();
 
+    this.realRol = 'user';
+    roles.forEach(rol => {
+      if (rol === 'ROLE_ADMIN') {
+        this.realRol = 'admin';
+      }
+    });
+    if (!this.authService.isLoggedIn() || expectedRol.indexOf(this.realRol) === -1) {
+      this.router.navigate(['/login']);
+      return false;
+    }
+
+    return true;
+  }
 }

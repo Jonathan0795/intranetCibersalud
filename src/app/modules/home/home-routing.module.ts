@@ -1,9 +1,11 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "src/app/core/guards/auth.guard";
+import { UserGuard } from "src/app/core/guards/user.guard";
 import { BusquedaUsuarioComponent } from "./component/busqueda-usuario/busqueda-usuario.component";
 import { DashboardInfoComponent } from "./component/dashboard-info/dashboard-info.component";
 import { DashboardComponent } from "./component/dashboard/dashboard.component";
+import { ForbiddenComponent } from "./component/forbidden/forbidden.component";
 import { FormularioProductoComponent } from "./component/formulario-producto/formulario-producto.component";
 import { ListaProductoComponent } from "./component/lista-producto/lista-producto.component";
 import { LoginComponent } from "./component/login/login.component";
@@ -18,6 +20,7 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent,
         canActivate:[AuthGuard],
+        data: { expectedRol: ['admin'] },
         children: [
             {
                 path: '',
@@ -46,7 +49,11 @@ const routes: Routes = [
                 component: BusquedaUsuarioComponent
             }
             ,]
-    }
+    },
+    {
+        path: 'forbidden',
+        component: ForbiddenComponent,
+    },
 ]
 @NgModule({
     imports: [RouterModule.forChild(routes)],

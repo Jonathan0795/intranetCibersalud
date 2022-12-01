@@ -1,0 +1,48 @@
+/*********************ERROR-403*********************/
+.container-fo {
+    width: 100;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-forbiden {
+    width: 80%;
+    display: flex;
+}
+
+.forbiden-img {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-for {
+    width: 90%
+}
+
+.forbiden-desc {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.h1-forbi {
+    color: var(--color-enlaces);
+    font-size: 3rem;
+}
+
+.forbiden-desc p {
+    font-size: 1.2rem;
+    color: var(--color-font);
+}
+
+.span-forbi {
+    color: #000;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
